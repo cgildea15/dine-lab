@@ -1,8 +1,7 @@
-// 1. Import the Firebase tools
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// 2. Your specific configuration
+// PASTE YOUR CONFIG HERE
 const firebaseConfig = {
     apiKey: "AIzaSyCUkJrQ3iBexCoviCHlVoITpGDLD6G0GfQ",
     authDomain: "localdealsai-tkic9.firebaseapp.com",
@@ -12,63 +11,68 @@ const firebaseConfig = {
     appId: "1:860537516405:web:34bb646c88bd251d96a33c"
 };
 
-// 3. Initialize Firebase & Firestore
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-console.log("DineLab: Connected to localdealsai database! 🔥");
+console.log("DineLab: Logic Core Online! 🧪");
 
-// 4. Function to add a new deal row in the form UI
+// UI: Add dynamic deal rows
 document.getElementById('add-deal-row').addEventListener('click', () => {
     const container = document.getElementById('deal-container');
     const newRow = document.createElement('div');
     newRow.className = 'deal-entry';
     newRow.innerHTML = `
-        <input type="text" class="deal-title" placeholder="e.g. $5 Margaritas">
-        <input type="text" class="deal-details" placeholder="Details (Bar Only, etc.)">
+        <input type="text" class="deal-title" placeholder="Deal Item" style="margin-bottom:5px">
+        <input type="text" class="deal-details" placeholder="Details (e.g. 1/2 off)">
     `;
     container.appendChild(newRow);
 });
 
-// 5. The "Save to Firestore" Logic
+// SUBMIT: Save to Firestore
 document.getElementById('entry-form').addEventListener('submit', async (e) => {
-    e.preventDefault(); // Prevents the page from refreshing
+    e.preventDefault();
 
-    // Grab the main details
+    // 1. Basic Info
     const name = document.getElementById('res-name').value;
-    const cuisine = document.getElementById('res-cuisine').value;
+    const city = document.getElementById('res-city').value;
     const zip = document.getElementById('res-zip').value;
+    
+    // 2. Cuisine Array (Splits "Pizza, Italian" into ["Pizza", "Italian"])
+    const cuisines = document.getElementById('res-cuisine').value.split(',').map(c => c.trim());
 
-    // Grab all deal rows and turn them into an array of objects
+    // 3. Days Array
+    const activeDays = [];
+    document.querySelectorAll('.day-check:checked').forEach(cb => activeDays.push(cb.value));
+
+    // 4. Time Window
+    const timing = {
+        start: document.getElementById('time-start').value,
+        end: document.getElementById('time-end').value
+    };
+
+    // 5. Deals Array
     const dealRows = document.querySelectorAll('.deal-entry');
     const deals = [];
-    
     dealRows.forEach(row => {
         const title = row.querySelector('.deal-title').value;
         const details = row.querySelector('.deal-details').value;
-        if (title) { // Only add if there's a title
-            deals.push({ title, details });
-        }
+        if(title) deals.push({ title, details });
     });
 
     try {
-        // 'addDoc' creates a new document in the 'happyHours' collection
-        const docRef = await addDoc(collection(db, "happyHours"), {
-            name: name,
-            cuisine: cuisine,
-            zip: zip,
-            deals: deals,
-            lastUpdated: serverTimestamp() // Adds a real-world timestamp
+        await addDoc(collection(db, "happyHours"), {
+            name,
+            location: { city, zip },
+            cuisines,
+            activeDays,
+            timing,
+            deals,
+            lastVerified: serverTimestamp()
         });
-
-        console.log("Document written with ID: ", docRef.id);
-        alert("Deal Saved to the Lab! 🧪");
-        
-        // Reset the form for the next entry
-        document.getElementById('entry-form').reset();
-        
-    } catch (error) {
-        console.error("Error adding document: ", error);
-        alert("Error saving! Check the console.");
+        alert(`Success! ${name} added to the Lab.`);
+        location.reload(); // Refresh to clear form
+    } catch (err) {
+        console.error(err);
+        alert("Check console - Error saving data.");
     }
 });

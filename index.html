@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DineLab | Happy Deals Tracker</title>
+    <title>DineLab | Happy Hour Tracker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -42,9 +42,29 @@
             <h3>🧪 The Lab: Add New Data</h3>
             <form id="entry-form">
                 <input type="text" id="res-name" placeholder="Restaurant Name" required>
+                
                 <div class="row">
-                    <input type="text" id="res-cuisine" placeholder="Cuisine (Italian, Sushi...)">
+                    <input type="text" id="res-city" placeholder="City" value="Palm Beach Gardens">
                     <input type="text" id="res-zip" placeholder="Zip Code" value="33410">
+                </div>
+
+                <input type="text" id="res-cuisine" placeholder="Cuisines (e.g. Italian, Pizza, Wings)">
+
+                <div class="timing-box">
+                    <h4>When is it active?</h4>
+                    <div class="days-grid">
+                        <label><input type="checkbox" class="day-check" value="Monday"> Mon</label>
+                        <label><input type="checkbox" class="day-check" value="Tuesday"> Tue</label>
+                        <label><input type="checkbox" class="day-check" value="Wednesday"> Wed</label>
+                        <label><input type="checkbox" class="day-check" value="Thursday"> Thu</label>
+                        <label><input type="checkbox" class="day-check" value="Friday"> Fri</label>
+                        <label><input type="checkbox" class="day-check" value="Saturday"> Sat</label>
+                        <label><input type="checkbox" class="day-check" value="Sunday"> Sun</label>
+                    </div>
+                    <div class="row time-row">
+                        <label>Start: <input type="time" id="time-start" value="15:00"></label>
+                        <label>End: <input type="time" id="time-end" value="18:00"></label>
+                    </div>
                 </div>
                 
                 <div id="deal-container">
