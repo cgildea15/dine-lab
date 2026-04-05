@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DineLab | Happy Deals Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>🍽️ DineLab</h1>
+        <p>Verified Deals Data | 33410 & Beyond</p>
+    </header>
+
+    <main>
+        <section id="filter-section" class="glass-card">
+            <h3>🔍 Find a Deal</h3>
+            <div class="filter-controls">
+                <select id="filter-day">
+                    <option value="">Any Day</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
+                <input type="text" id="filter-city" placeholder="City (e.g. Palm Beach Gardens)">
+                <button id="search-btn">Filter Deals</button>
+            </div>
+        </section>
+
+        <section id="feed-section">
+            <div id="results-container">
+                <p class="placeholder-text">Enter filters above to see deals...</p>
+            </div>
+        </section>
+
+        <section id="lab-section" class="glass-card">
+            <h3>🧪 The Lab: Add New Data</h3>
+            <form id="entry-form">
+                <input type="text" id="res-name" placeholder="Restaurant Name" required>
+                <div class="row">
+                    <input type="text" id="res-cuisine" placeholder="Cuisine (Italian, Sushi...)">
+                    <input type="text" id="res-zip" placeholder="Zip Code" value="33410">
+                </div>
+                
+                <div id="deal-container">
+                    <h4>Deals (Food & Drink)</h4>
+                    <div class="deal-entry">
+                        <input type="text" class="deal-title" placeholder="e.g. $5 Margaritas">
+                        <input type="text" class="deal-details" placeholder="Details (Bar Only, etc.)">
+                    </div>
+                </div>
+                <button type="button" id="add-deal-row">+ Add Another Item</button>
+                
+                <hr>
+                <button type="submit" id="save-btn">Save to Firestore</button>
+            </form>
+        </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
