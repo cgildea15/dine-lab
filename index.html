@@ -27,25 +27,24 @@
                     <option value="Saturday">Saturday</option>
                     <option value="Sunday">Sunday</option>
                 </select>
-                <input type="text" id="filter-city" placeholder="City (e.g. Palm Beach Gardens)">
+                <input type="text" id="filter-city" placeholder="City">
                 <button id="search-btn">Filter Deals</button>
             </div>
         </section>
 
         <section id="feed-section">
             <div id="results-container">
-                <p class="placeholder-text">Enter filters above to see deals...</p>
-            </div>
+                </div>
         </section>
 
         <section id="lab-section" class="glass-card">
-            <h3>🧪 The Lab: Add New Data</h3>
+            <h3>🧪 Add Local Deal</h3>
             <form id="entry-form">
                 <input type="text" id="res-name" placeholder="Restaurant Name" required>
                 
                 <div class="row">
-                    <input type="text" id="res-city" placeholder="City" value="Palm Beach Gardens">
-                    <input type="text" id="res-zip" placeholder="Zip Code" value="33410">
+                    <input type="text" id="res-city" placeholder="City">
+                    <input type="text" id="res-zip" placeholder="Zip Code">
                 </div>
 
                 <input type="text" id="res-cuisine" placeholder="Cuisines (e.g. Italian, Pizza, Wings)">
@@ -62,8 +61,8 @@
                         <label><input type="checkbox" class="day-check" value="Sunday"> Sun</label>
                     </div>
                     <div class="row time-row">
-                        <label>Start: <input type="time" id="time-start" value="15:00"></label>
-                        <label>End: <input type="time" id="time-end" value="18:00"></label>
+                        <label>Start: <input type="time" id="time-start"></label>
+                        <label>End: <input type="time" id="time-end"></label>
                     </div>
                 </div>
                 
@@ -77,7 +76,7 @@
                 <button type="button" id="add-deal-row">+ Add Another Item</button>
                 
                 <hr>
-                <button type="submit" id="save-btn">Save to Firestore</button>
+                <button type="submit" id="save-btn">Update</button>
             </form>
         </section>
     </main>
